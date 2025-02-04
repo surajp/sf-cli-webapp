@@ -9,7 +9,7 @@ export async function load({ fetch }) {
   console.log(commands);
   let orgNames = [];
   try {
-    res = await fetch("/sfdxaliases.json");
+    res = await fetch("/orgaliases.json");
     const orgs = await res.json();
     orgNames = Object.values(orgs.result)
       .flatMap((category) => category.map((org) => org.alias || org.username))
