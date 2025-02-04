@@ -20,9 +20,9 @@
   //.sort((a, b) => (a.required ?? false) > (b.required ?? false));
   let commandStr = "";
 
-  function runCommand() {
+  function generateCommmand() {
     if (!availableFlags || availableFlags.length === 0) {
-      commandStr = `sf ${selectedCommand.id}`;
+      $: commandStr = `sf ${selectedCommand.id}`;
       return;
     }
     let args = availableFlags
@@ -43,7 +43,7 @@
       })
       .filter((val) => val)
       .join(" ");
-    commandStr = `sf ${selectedCommand.id} ${args}`;
+    $: commandStr = `sf ${selectedCommand.id} ${args}`;
   }
 
   async function copyText() {
@@ -59,7 +59,9 @@
     }, 2000);
   }
 
-  runCommand();
+  $: if (selectedCommand) {
+    generateCommmand();
+  }
 </script>
 
 <div class="bg-white rounded-lg p-6 space-y-6">
@@ -72,7 +74,7 @@
         {flag}
         {orgNames}
         bind:value={flagValues[flag.name]}
-        on:input={runCommand}
+        on:input={generateCommmand}
       />
     {/each}
   </div>
