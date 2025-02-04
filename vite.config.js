@@ -3,5 +3,5 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [sveltekit()],
-  base: "/sf-cli-webapp",
+  base: "/sf-cli-webapp/",
 });
