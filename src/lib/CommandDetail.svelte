@@ -1,22 +1,3 @@
-<style>
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: #fff;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    opacity: 0.9;
-    transition: opacity 0.3s ease;
-    background: #4caf50;
-  }
-  .toast.error {
-    background: #ff4d4d;
-  }
-</style>
-
 <!-- src/lib/CommandDetail.svelte -->
 <script>
   export let selectedCommand;

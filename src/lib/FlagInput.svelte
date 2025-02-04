@@ -1,7 +1,4 @@
 <style>
-  .flag-input {
-    margin-bottom: 1em;
-  }
   label {
     display: block;
     font-weight: bold;
@@ -10,10 +7,6 @@
   input[type="number"] {
     width: 100%;
     padding: 0.5em;
-  }
-  .light {
-    color: #666;
-    font-size: 0.9em;
   }
 </style>
 
