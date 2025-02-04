@@ -36,6 +36,7 @@
   $: availableFlags = Object.values(selectedCommand?.flags).filter(
     (flag) => !flag.hidden && flag.name !== "flags-dir",
   );
+  //.sort((a, b) => (a.required ?? false) > (b.required ?? false));
   let commandStr = "";
 
   function runCommand() {
@@ -46,6 +47,7 @@
     let args = availableFlags
       .map((flag) => {
         if (flag.type === "boolean") {
+          console.log("is boolean " + flag.name, flagValues[flag.name]);
           // Boolean flags only appear if true
           return flagValues[flag.name] ? `--${flag.name}` : "";
         } else if (flagValues[flag.name]) {
@@ -79,26 +81,47 @@
   runCommand();
 </script>
 
-<div>
-  <h2>{selectedCommand.id}</h2>
-  <p>{selectedCommand.description}</p>
+<div class="bg-white rounded-lg p-6 space-y-6">
+  <h2 class="text-2xl font-bold text-slate-800">{selectedCommand.id}</h2>
+  <p class="text-slate-600">{selectedCommand.description}</p>
 
-  {#each availableFlags as flag}
-    <FlagInput
-      {flag}
-      {orgNames}
-      bind:value={flagValues[flag.name]}
-      on:input={runCommand}
-    />
-  {/each}
-  <button type="button" on:click={copyText}>Copy Command</button>
+  <div class="space-y-4">
+    {#each availableFlags as flag}
+      <FlagInput
+        {flag}
+        {orgNames}
+        bind:value={flagValues[flag.name]}
+        on:input={runCommand}
+      />
+    {/each}
+  </div>
 
-  <p>{commandStr}</p>
+  <div class="space-y-4">
+    <button
+      type="button"
+      on:click={copyText}
+      class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
+    >
+      Copy Command
+    </button>
+
+    <p
+      class="font-mono bg-slate-50 p-4 rounded-lg border border-slate-200 whitespace-pre-wrap break-all"
+    >
+      {commandStr}
+    </p>
+  </div>
 
   {#if copied == "yes"}
-    <div class="toast">Command copied to clipboard</div>
+    <div
+      class="fixed bottom-4 right-4 bg-green-100 text-green-800 px-4 py-2 rounded-lg shadow-lg border border-green-200"
+    >
+      Command copied to clipboard
+    </div>
   {:else if copied == "no"}
-    <div class="toast error">
+    <div
+      class="fixed bottom-4 right-4 bg-red-100 text-red-800 px-4 py-2 rounded-lg shadow-lg border border-red-200"
+    >
       Failed to copy command. Check your browser settings and permissions
     </div>
   {/if}

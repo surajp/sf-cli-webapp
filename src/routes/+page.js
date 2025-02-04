@@ -6,6 +6,7 @@ export async function load({ fetch }) {
   commands = JSON.parse(
     JSON.stringify(commands).replaceAll("<%= config.bin %>", "sf"),
   );
+  console.log(commands);
   let orgNames = [];
   try {
     res = await fetch("/sfdxaliases.json");
