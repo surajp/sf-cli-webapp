@@ -6,10 +6,13 @@ export async function load({ fetch }) {
   commands = JSON.parse(
     JSON.stringify(commands).replaceAll("<%= config.bin %>", "sf"),
   );
-  res = await fetch("/sfdxaliases.json");
-  const orgs = await res.json();
-  let orgNames = Object.values(orgs.result)
-    .flatMap((category) => category.map((org) => org.alias || org.username))
-    .filter((name, index, arr) => arr.indexOf(name) === index);
+  let orgNames = [];
+  try {
+    res = await fetch("/sfdxaliases.json");
+    const orgs = await res.json();
+    orgNames = Object.values(orgs.result)
+      .flatMap((category) => category.map((org) => org.alias || org.username))
+      .filter((name, index, arr) => arr.indexOf(name) === index);
+  } catch (e) {}
   return { orgNames, commands };
 }
