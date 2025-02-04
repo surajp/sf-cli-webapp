@@ -1,5 +1,5 @@
 import adapter from "@sveltejs/adapter-static";
-
+const dev = process.argv.includes("dev");
 export default {
   kit: {
     adapter: adapter({
@@ -11,5 +11,8 @@ export default {
       precompress: false,
       strict: true,
     }),
+    paths: {
+      base: dev ? "/" : "/sf-cli-webapp",
+    },
   },
 };
