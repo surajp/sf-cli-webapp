@@ -1,7 +1,6 @@
 <!-- src/lib/CommandDetail.svelte -->
 <script>
   export let selectedCommand;
-  export let orgNames;
   import FlagInput from "./FlagInput.svelte";
   import { createEventDispatcher } from "svelte";
 
@@ -72,7 +71,6 @@
     {#each availableFlags as flag}
       <FlagInput
         {flag}
-        {orgNames}
         bind:value={flagValues[flag.name]}
         on:input={generateCommmand}
       />

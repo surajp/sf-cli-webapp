@@ -63,7 +63,7 @@
       <div class="w-[800px] border-l border-slate-200 pl-2">
         {#if selectedCommand}
           <div class="bg-white rounded-sm shadow-sm p-2">
-            <CommandDetail {selectedCommand} orgNames={data.orgNames} />
+            <CommandDetail {selectedCommand} />
           </div>
         {:else}
           <div class="text-center py-8 text-slate-500">

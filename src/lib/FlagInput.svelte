@@ -12,9 +12,9 @@
 
 <!-- src/lib/FlagInput.svelte -->
 <script>
+  import { page } from "$app/stores";
   export let flag;
   export let value;
-  export let orgNames;
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
 
@@ -79,7 +79,7 @@
         class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-200 focus:border-blue-500 outline-none invalid:border-red-500"
         required={flag.required}
       />
-    {:else if flag.options || ((flag.name === "target-org" || flag.name === "target-dev-hub") && orgNames?.length)}
+    {:else if flag.options || ((flag.name === "target-org" || flag.name === "target-dev-hub") && $page.data.orgNames?.length)}
       <select
         id={flag.name}
         bind:value
@@ -93,7 +93,7 @@
             <option value={option}>{option}</option>
           {/each}
         {:else}
-          {#each orgNames as orgName}
+          {#each $page.data.orgNames as orgName}
             <option value={orgName}>{orgName}</option>
           {/each}
         {/if}
