@@ -107,19 +107,21 @@
       Failed to copy command. Check your browser settings and permissions
     </div>
   {/if}
-</div>
-{#if selectedCommand.examples && selectedCommand.examples.length > 0}
-  <h3 class="text-xl font-bold text-slate-800">Examples</h3>
-  {#each selectedCommand.examples as example}
-    {#each example.split("\n") as part, index}
-      {#if index == 0}
-        <p class="text-slate-600">{part}</p>
-      {:else}
-        <p class="font-mono bg-slate-50 p-2 rounded-sm border border-slate-200">
-          {part.replaceAll("<%= command.id %>", selectedCommand.id)}
-        </p>
-      {/if}
+  {#if selectedCommand.examples && selectedCommand.examples.length > 0}
+    <h3 class="text-xl font-bold text-slate-800">Examples</h3>
+    {#each selectedCommand.examples as example}
+      {#each example.split("\n") as part, index}
+        {#if index == 0}
+          <p class="text-slate-600">{part}</p>
+        {:else}
+          <p
+            class="font-mono bg-slate-50 p-2 rounded-sm border border-slate-200"
+          >
+            {part.replaceAll("<%= command.id %>", selectedCommand.id)}
+          </p>
+        {/if}
+      {/each}
+      <br />
     {/each}
-    <br />
-  {/each}
-{/if}
+  {/if}
+</div>

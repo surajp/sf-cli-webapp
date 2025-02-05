@@ -60,9 +60,9 @@
         {/if}
       </div>
 
-      <div class="w-[500px] border-l border-slate-200 pl-6">
+      <div class="w-[800px] border-l border-slate-200 pl-2">
         {#if selectedCommand}
-          <div class="bg-white rounded-lg shadow-sm p-6">
+          <div class="bg-white rounded-sm shadow-sm p-2">
             <CommandDetail {selectedCommand} orgNames={data.orgNames} />
           </div>
         {:else}
